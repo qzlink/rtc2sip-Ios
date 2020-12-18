@@ -1,0 +1,128 @@
+//
+//  PrefixHeader.pch
+//  加密通讯
+//
+//  Created by apple on 2018/12/22.
+//  Copyright © 2018年 apple. All rights reserved.
+//
+
+#ifndef PrefixHeader_h
+#define PrefixHeader_h
+
+//DEBUG调试
+#ifdef DEBUG
+#define Sog(FORMAT, ...) printf("%s\n", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+
+#else
+
+#define Sog(...) {}
+#endif
+
+//APPDelegate
+#define APPDELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
+//RGB_COLOR
+#define RGB_COLOR(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
+#define SCREEN_W [UIScreen mainScreen].bounds.size.width
+#define SCREEN_H [UIScreen mainScreen].bounds.size.height
+//状态栏高度
+#define kStatusH APPDELEGATE.getStatusBarHeight
+//是否为iphoneX
+#define kIsIPhoneX APPDELEGATE.isIphoneX
+// 状态栏和导航栏总高度
+#define kNavBarHeight      (CGFloat)(kIsIPhoneX?(88):(64))
+//64导航栏距离顶部高度
+#define kTopHeight_for64NV      (CGFloat)(kIsIPhoneX?(kStatusH-20):(0))
+// iphoneX底部非安全区域
+#define kIphoneXBottomHeight      (CGFloat)(kIsIPhoneX?(34):(0))
+//Tabbar高度
+#define TabbarHeigt (CGFloat)(kIsIPhoneX?(49.0 + 34.0):(49.0))
+
+//文件管理器
+#define FM [NSFileManager defaultManager]
+//沙盒的Document路径
+#define DOCUMENT_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+//聊天图片存放路径
+#define IMChat_ImagePath [DOCUMENT_PATH stringByAppendingPathComponent:@"IMChat_ImagePath"]
+//聊天文件存放路径
+#define IMChat_FilePath [DOCUMENT_PATH stringByAppendingPathComponent:@"IMChat_FilePath"]
+//语音存放路径
+#define IMChat_VoicePath [DOCUMENT_PATH stringByAppendingPathComponent:@"IMChat_VoicePath"]
+//菜单文件存放路径
+#define IMMenu_ImagePath [DOCUMENT_PATH stringByAppendingPathComponent:@"IMMenu_ImagePath"]
+//电话录音文件存放路径
+#define IMCall_RecordPath [DOCUMENT_PATH stringByAppendingPathComponent:@"IMCall_RecordPath"]
+//缓存路径 用户可以手动清除
+#define CACHE_PATH [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+//聊天视频存放路径
+#define IMChat_VideoPath [CACHE_PATH stringByAppendingPathComponent:@"IMChat_VideoPath"]
+
+//通知
+#define NC [NSNotificationCenter defaultCenter]
+//对方接听我的语音电话 开启定时器计时
+#define StartAudioOrVideoTimer_Call_NC @"startAudioOrVideoTimer"
+//对方拒绝我的语音电话 或者接听之后挂断
+#define TargetReject_Call_NC @"targetReject_Call"
+////未接来电
+//#define missed_Call_NC @"missed_Call"
+//pushCalling 离线收到通知 监听是否收到aoto
+#define Push_listenCall_NC @"push_listenCall"
+//自动挂断 离线收到通知 如果对方已经挂断 自动挂断
+#define Push_hangupCall_NC @"push_hangupCall"
+//刷新通话记录
+#define RefreshRecordList_NC @"refreshRecordList"
+//清空号码
+#define ClearNum_NC @"clearNum"
+//连接状态
+#define ConnectStatus_NC @"connectStatus"
+
+//NSUserDefaultsC
+#define UD [NSUserDefaults standardUserDefaults]
+//当前用户信息
+//安全码 用于用户找回账号
+#define UDAccount @"account_user"
+#define UDUserId  @"userId"
+#define UDAPPID @"appid"
+#define UDPassword @"userPassword"
+
+//版本号
+#define C_VersionNo @"1.1.008"
+
+//声网呼叫等待时间
+#define CALL_time 60
+
+// 弱引用
+#define IOWeakSelf __weak typeof(self) weakSelf = self;
+// 强引用
+#define IOStrongSelf __strong __typeof(self) strongSelf = weakSelf;
+// 第三方
+#import <WebRTC2SIPSDK/WebRTC2SIPSDK.h>
+#import "AFNetworking.h"
+#import "IQKeyboardManager.h"
+#import <Bugly/Bugly.h>
+#import "MJRefresh.h"
+#import "UIButton+WebCache.h"
+#import "UIImageView+WebCache.h"
+#import "UIImage+GIF.h"
+
+#import "NSString+DS.h"
+
+//自封装
+#import "BaseVC.h"
+#import "BaseModel.h"
+#import "BaseCVCell.h"
+#import "BaseTVCell.h"
+#import "UIView+DS.h"
+#import "NSDate+Tool.h"
+#import "LoadHintV.h"
+#import "UIViewController+Tool.h"
+#import "ZDNavigationC.h"
+
+//扩展类
+//#import "FMDB.h"
+#import "IMLoginVC.h"
+#import "IMClient.h"
+#import "IMHTTPSManager.h"
+#import "AppDelegate.h"
+
+#endif /* PrefixHeader_h */
+

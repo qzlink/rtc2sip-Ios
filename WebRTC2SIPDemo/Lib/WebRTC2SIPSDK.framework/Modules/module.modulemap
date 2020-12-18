@@ -1,0 +1,6 @@
+framework module WebRTC2SIPSDK {
+  umbrella header "WebRTC2SIPSDK.h"
+
+  export *
+  module * { export * }
+}
